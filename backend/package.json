@@ -1,0 +1,19 @@
+{
+  "name": "fakenewsdetector",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "test": "test"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "child_process": "^1.0.2",
+    "express": "^4.18.2",
+    "express-async-handler": "^1.2.0",
+    "nodemon": "^3.0.1"
+  }
+}
