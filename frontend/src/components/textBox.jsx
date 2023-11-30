@@ -4,7 +4,7 @@ const TextBox = ({text, setText}) => {
         <Textarea 
         value={text}
         onChange={(e) => setText(e.target.value)}
-        placeholder='Enter the news article here' margin={8} height='200px' w={'70%'} background={'white'} resize='vertical' />
+        placeholder='Enter the news article here'  height='200px' background={'blue.50'} resize='vertical' />
     </>)
 }
 

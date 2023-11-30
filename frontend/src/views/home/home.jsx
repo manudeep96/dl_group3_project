@@ -1,4 +1,4 @@
-import { Box, Button, Heading , Text} from '@chakra-ui/react'
+import { Text, Button, Heading, Input, Stack } from '@chakra-ui/react'
 import './home.css'
 import TextBox from '../../components/textBox'
 import { useState } from 'react'
@@ -6,6 +6,15 @@ import { useState } from 'react'
 const Home = () => {
 
     const [text, setText] = useState('')
+    const [subject, setSubject] = useState('')
+    const [speaker, setSpeaker] = useState('')
+
+    const [state, setState] = useState('')
+
+    const [party, setParty] = useState('')
+
+    const [context, setContext] = useState('')
+
     const [loading, setLoading] = useState(false);
     const [result, setResult] = useState(null);
 
@@ -14,8 +23,12 @@ const Home = () => {
             return
         }
         setLoading(true)
-        const body = { text: text }
-        const payload = { method: "POST", body: JSON.stringify(body) }
+        const body = { text, subject, speaker, state, party, context }
+        const payload = {
+            method: "POST", 
+            headers: {"Content-Type": "application/json"}, 
+            body: JSON.stringify(body)
+        }
         try {
             let res = await fetch("http://localhost:5000/api/detect", payload)
             res = await res.json();
@@ -31,9 +44,16 @@ const Home = () => {
             <Heading size='xl' marginTop={4} color={'blue.50'}>
                 Fake news detector
             </Heading>
-            <TextBox text={text} setText={setText} />
+            <Stack w="80%" margin="40px" spacing={8} padding={'8px'}>
+                <TextBox text={text} setText={setText} />
+                <Input value={subject} onChange={(e) => setSubject(e.target.value)} background={'blue.50'} placeholder='Subject' />
+                <Input value={speaker} onChange={(e) => setSpeaker(e.target.value)} background={'blue.50'} placeholder='Speaker' />
+                <Input value={state} onChange={(e) => setState(e.target.value)} background={'blue.50'} placeholder='State' />
+                <Input value={party} onChange={(e) => setParty(e.target.value)} background={'blue.50'} placeholder='Party affiliation' />
+                <Input value={context} onChange={(e) => setContext(e.target.value)} background={'blue.50'} placeholder='Context' />
+            </Stack>
             <Button isLoading={loading} onClick={() => predict()} colorScheme='blue'> Predict correctness </ Button>
-            {result? (<Text as='b' fontSize={'xl'} marginTop={4} color={'blue.50'}>{`This text is likely to be ${result}`}</Text>): <></>}
+            {result ? (<Text as='b' fontSize={'xl'} marginTop={4} color={'blue.50'}>{`This text is likely to be ${result}`}</Text>) : <></>}
         </div>)
 }
 
