@@ -5,7 +5,7 @@ import { Box, ChakraProvider } from '@chakra-ui/react';
 function App() {
   return (
     <ChakraProvider>
-      <Box h={'100vh'} padding={'5%'} background={'gray.900'}>
+      <Box minH={'100vh'} h={'100%'} padding={'5%'} background={'gray.900'}>
         <Home />
       </Box>
     </ChakraProvider>
