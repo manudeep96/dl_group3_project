@@ -2,7 +2,7 @@ expressAsyncHandler = require('express-async-handler')
 const {spawn} = require('child_process');
 
 const detectClass = expressAsyncHandler( async(req, res) => {
-    console.log(req.body.text);
+    console.log(req.body);
     // Call python script
     const pyScript = spawn('python', ['./scripts/predictor.py', req.body.text])
     pyScript.stdout.on('data', (data) => {
