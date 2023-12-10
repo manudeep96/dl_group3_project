@@ -6,7 +6,7 @@ import { useState } from 'react'
 const Home = () => {
 
     const [text, setText] = useState('')
-    const [subject, setSubject] = useState('')
+    const [jobTitle, setJobTitle] = useState('')
     const [speaker, setSpeaker] = useState('')
 
     const [state, setState] = useState('')
@@ -23,14 +23,14 @@ const Home = () => {
             return
         }
         setLoading(true)
-        const body = { text, subject, speaker, state, party, context }
+        const body = { text, jobTitle, speaker, state, party, context }
         const payload = {
             method: "POST", 
             headers: {"Content-Type": "application/json"}, 
             body: JSON.stringify(body)
         }
         try {
-            let res = await fetch("http://localhost:5000/api/detect", payload)
+            let res = await fetch("http://localhost:5002/api/detect", payload)
             res = await res.json();
             setResult(res?.data)
         } catch (e) {
@@ -46,7 +46,7 @@ const Home = () => {
             </Heading>
             <Stack w="80%" margin="40px" spacing={8} padding={'8px'}>
                 <TextBox text={text} setText={setText} />
-                <Input value={subject} onChange={(e) => setSubject(e.target.value)} background={'blue.50'} placeholder='Subject' />
+                <Input value={jobTitle} onChange={(e) => setJobTitle(e.target.value)} background={'blue.50'} placeholder='Job Title' />
                 <Input value={speaker} onChange={(e) => setSpeaker(e.target.value)} background={'blue.50'} placeholder='Speaker' />
                 <Input value={state} onChange={(e) => setState(e.target.value)} background={'blue.50'} placeholder='State' />
                 <Input value={party} onChange={(e) => setParty(e.target.value)} background={'blue.50'} placeholder='Party affiliation' />
